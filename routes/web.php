@@ -14,7 +14,17 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('listings',[
+        'heading'=> 'latest Listings',
+        "listData" => [
+            [
+                "id"=>"1"
+            ],
+            [
+                "id"=>"2"
+            ]
+        ]
+    ]);
 });
 
 Route::get('/hello', function () {
