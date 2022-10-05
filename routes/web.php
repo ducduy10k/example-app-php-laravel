@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Models\Listing;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,14 +18,7 @@ use Illuminate\Http\Request;
 Route::get('/', function () {
     return view('listings',[
         'heading'=> 'latest Listings',
-        "listData" => [
-            [
-                "id"=>"1"
-            ],
-            [
-                "id"=>"2"
-            ]
-        ]
+        "listData" => Listing::all()
     ]);
 });
 
@@ -38,4 +33,10 @@ Route::get('/post/{id}', function ($id){
 
 Route::get('/search', function (Request $request){
     dd($request->name . ' ' . $request->city);
+});
+
+Route::get('/listings/{id}', function ($id){
+    return view('listing', [
+        'data'=>Listing::find($id)
+    ]);
 });
