@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ListingController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\Listing;
@@ -15,12 +16,7 @@ use App\Models\Listing;
 |
 */
 
-Route::get('/', function () {
-    return view('listings',[
-        'heading'=> 'latest Listings',
-        "listData" => Listing::all()
-    ]);
-});
+Route::get('/', [ListingController::class, 'index']);
 
 Route::get('/hello', function () {
     return response( 'Hellow World', 200)->header('Content-Type', 'text/plain');
@@ -35,8 +31,11 @@ Route::get('/search', function (Request $request){
     dd($request->name . ' ' . $request->city);
 });
 
-Route::get('/listings/{id}', function ($id){
-    return view('listing', [
-        'data'=>Listing::find($id)
-    ]);
-});
+Route::get('/listings/create', [ListingController::class, 'create']);
+
+Route::post('/listings', [ListingController::class, 'store']);
+
+Route::get('/listings/{id}', [ListingController::class, 'show']);
+
+
+

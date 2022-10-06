@@ -1,19 +1,18 @@
-@extends('layout')
+@extends('layouts.layout1')
 @section('content')
+
     
-<h1>
+@include('partials.listing-header')
+{{-- <h1>
     <?php echo $heading; ?>
-
-</h1>
-
-<?php foreach ($listData as $data) : ?>
-    {{-- <h2><?php echo $data['id']; ?></h2> --}}
+</h1> --}}
+{{-- <?php foreach ($listData as $data) : ?>
+    <h2><?php echo $data['id']; ?></h2> 
     {{$heading}}
-<?php endforeach; ?>
+<?php endforeach; ?> --}}
 
 @foreach ($listData as $data)
-    <h2><?php echo $data['description']; ?></h2>
-    {{$heading}}
+   <x-listing-card :data="$data"/>
 @endforeach
 
 @php
@@ -34,6 +33,4 @@
 <p>No listungs found</p>
 @endunless
      --}}
-
-
      @endsection
