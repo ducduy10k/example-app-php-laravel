@@ -9,7 +9,7 @@ class ListingController extends Controller
 {
     public function index () {
         // dd(request('tag'));
-        $listings = Listing::latest()->filter(request(['name', 'description', 'search']))->get();
+        $listings = Listing::latest()->filter(request(['name', 'description', 'search']))->paginate(2);
         // dd($listings);
         return view('listings.index',[
             "listData" => $listings
@@ -42,6 +42,6 @@ class ListingController extends Controller
         // Session::flash('message', 'Listing created');
 
         return redirect('/')->with('message', 'Listing created successfully!');
-        
+
     }
 }
