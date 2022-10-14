@@ -25,4 +25,6 @@ class Listing extends Model
             ->orWhere('description', 'like', '%' . request('search') .'%');
         }
     }
+
+    // Relationship To User 3:56:55
 }

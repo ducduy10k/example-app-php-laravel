@@ -34,19 +34,17 @@ Route::get('/search', function (Request $request){
 
 Route::get('/listings/create', [ListingController::class, 'create'])->middleware('auth');
 
-Route::post('/listings', [ListingController::class, 'store']);
+Route::post('/listings', [ListingController::class, 'store'])->middleware('auth');
 
 Route::get('/listings/{id}', [ListingController::class, 'show']);
 
 
-Route::get('/register', [UserController::class, 'create']);
+Route::get('/register', [UserController::class, 'create'])->middleware('guest'); // Guest -> khách hàng -> thực hiện được khi chưa có auth
 
 Route::post('/users', [UserController::class, 'store']);
 
-Route::post('/logout', [UserController::class, 'logout']);
+Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
 
-Route::get('/login', [UserController::class, 'login']);
+Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest'); // đặt tên cho router . Xem middleware auth sẽ sử dụng name router để redirect
 
-
-
-
+Route::post('/login', [UserController::class, 'authenticate']);
