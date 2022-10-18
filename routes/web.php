@@ -36,8 +36,10 @@ Route::get('/listings/create', [ListingController::class, 'create'])->middleware
 
 Route::post('/listings', [ListingController::class, 'store'])->middleware('auth');
 
-Route::get('/listings/{id}', [ListingController::class, 'show']);
+// Manage Listings
+Route::get('/listings/manage', [ListingController::class, 'manage'])->middleware('auth');
 
+Route::get('/listings/{id}', [ListingController::class, 'show']);
 
 Route::get('/register', [UserController::class, 'create'])->middleware('guest'); // Guest -> khách hàng -> thực hiện được khi chưa có auth
 
